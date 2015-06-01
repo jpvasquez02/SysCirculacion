@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Control de Comentarios</title>
+	<title>Circulacion - Control de Comentarios</title>
 	<link href="/static/css/bootstrap-cerulean.min.css" rel="stylesheet">
     <link href="/static/css/charisma-app.css" rel="stylesheet">
     <link href='/static/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
@@ -161,14 +161,15 @@
      #control p label{ width: 20%; }
 </style>
 
-	<form id='control' style="border: 1px solid; padding: 1em;" action=='/control/' method="post">
+    <h2> Control de Comentarios </h2>
+	<form id='control' style="border: 1px solid; padding: 1em; width:50%;" action=='/control/' method="post">
     	{% csrf_token %}
     	{{ form.as_p }}
     	<input type="submit" value="Agregar"/>
     	<input type="reset" value="Limpiar" >
 	</form>
 
-	<footer class="row">
+	<footer class="row" style="text-align: center">
         <h3>
             <span> <p>Todos los derechos Reservados 2015 </p></span>
         </h3>
