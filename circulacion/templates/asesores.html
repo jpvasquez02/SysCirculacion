@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head %}
+	
+{% endblock %}
+
+
+{% block body %}
+	<form action="/asesor/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+	</form>
+
+{% block footer %}
+	{% include "footer.html" %}
+{% endblock %}
+
+{% endblock %}
+
