@@ -25,9 +25,14 @@ class CiudadAdmin(admin.ModelAdmin):
 class ControlAdmin(admin.ModelAdmin):
 	pass
 
+class ClientesAdmin(admin.ModelAdmin):
+	ordering=['Codigo']
+
+
 admin.site.register(asesores,AsesoresAdmin)
 admin.site.register(departamentos,DeptoAdmin)
 admin.site.register(ciudades,CiudadAdmin)
+admin.site.register(clientes,ClientesAdmin)
 admin.site.register(control,ControlAdmin)
 admin.site.register(planes,PlanesAdmin)
 admin.site.register(repartidores,RepartidoresAdmin)

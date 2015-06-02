@@ -16,5 +16,13 @@ class controlForm(forms.ModelForm):
     class Meta:
         model = control
         fields='__all__'
+
+class clientesForm(forms.ModelForm):
+    class Meta:
+        model = clientes
+        fields='__all__'
+        widgets = {
+            'FechaNacimiento': forms.DateInput(attrs={'class': 'datepicker','type':'date','dateformat':'yy-mm-dd'})
+    }
     
     

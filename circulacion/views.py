@@ -71,3 +71,25 @@ def set_control(request):
 		form= controlForm()
 
 	return render(request, 'control.html', {'form':form})	
+
+@login_required
+def set_clientes(request):
+	if request.method=='POST':
+		form=clientesForm(request.POST)
+
+		if form.is_valid():
+
+			emp=clientes()
+
+			emp.Codigo=request.POST.get("Codigo","")
+			emp.FechaNacimiento=request.POST.get("FechaNacimiento","")
+
+			print (request.POST)
+
+			emp.save()
+
+	else:
+		form=clientesForm()
+
+	return render(request, 'NewClient.html', {'form':form})
+	
