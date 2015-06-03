@@ -144,3 +144,95 @@ class empleados(models.Model):
 
 	def __str__(self):
 		return self.Nombre
+
+class suscripcion(models.Model):
+	Codigo=models.IntegerField(max_length=10,primary_key=True)
+	Suscriptor=models.ForeignKey(clientes)
+	Categoria=models.CharField(max_length=50,choices=[('Empresarial','Empresarial'),('Residencial','Residencial')])
+	Cantidad=models.IntegerField(max_length=5)
+	Plan=models.ForeignKey(planes)
+	Descuento=models.DecimalField(max_digits=5,decimal_places=2,null=True,blank=True)
+	Valor=models.DecimalField(max_digits=8,decimal_places=2)
+	Contrato=models.IntegerField()
+	Recibo=models.IntegerField()
+	Asesor=models.ForeignKey(asesores)
+	Ruta=models.ForeignKey(rutas)
+	Entrega=models.CharField(max_length=5,choices=[('L-D','L-D'),('L-S','L-S'),('L-V','L-V')])
+	Comentarios=models.TextField()
+	Tipo=models.CharField(max_length=35,choices=[('Canje','Canje'),('Certificado','Certificado'),('Cortesia','Cortesia'),('DxP','Deducible Por Planilla'),('Pagado','Pagado')])
+	Inicio=models.DateField()
+	Fin=models.DateField()
+	Repartidor=models.ForeignKey(repartidores)
+
+	class Meta:
+		ordering=['Codigo','Suscriptor']
+		verbose_name_plural='Suscripciones'
+
+	def __str__(self):
+		return '%s - %s' % (self.Codigo,self.Suscriptor)
+
+class tiraje(models.Model):
+	Ruta=models.ForeignKey(rutas)
+	Lunes=models.IntegerField(max_length=5)
+	Martes=models.IntegerField(max_length=5)
+	Miercoles=models.IntegerField(max_length=5)
+	Jueves=models.IntegerField(max_length=5)
+	Viernes=models.IntegerField(max_length=5)
+	Sabado=models.IntegerField(max_length=5)
+	Domingo=models.IntegerField(max_length=5)
+
+	class Meta:
+		ordering=['Ruta']
+		verbose_name_plural='Plural'
+
+	def __str__(self):
+		return self.Ruta.NombreRuta
+
+class cierre(models.Model):
+	Vendedor=models.ForeignKey(empleados)
+	Nombre=models.ForeignKey(suscripcion)
+	Cantidad=models.IntegerField(max_length=5)
+	Direccion=models.CharField(max_length=140)
+	Tipo=models.ForeignKey(planes)
+	Valor=models.DecimalField(max_digits=8,decimal_places=2)
+	Recibo=models.CharField(max_length=10)
+	ValorRecibido=models.DecimalField(max_digits=8,decimal_places=2)
+	Comision=models.DecimalField(max_digits=8,decimal_places=2)
+	FechaPago=models.DateField()
+	Inicio=models.DateField()
+	Fin=models.DateField()
+
+	class Meta:
+		
+		verbose_name_plural='Cierre Circulación'
+
+	def __str__(self):
+		return '%s - %s' % (self.Vendedor.Nombre)
+
+class recibo(models.Model):
+	Codigo=models.AutoField(primary_key=True)
+	Fecha=models.DateField()
+	Nombre=models.ForeignKey(suscripcion)
+	Plan=models.ForeignKey(planes)
+	Tipo=models.CharField(max_length=35,choices=[('Canje','Canje'),('Certificado','Certificado'),('Cortesia','Cortesia'),('DxP','Deducible Por Planilla'),('Pagado','Pagado')])
+	Descripcion=models.TextField()
+	Valor=models.DecimalField(max_digits=8,decimal_places=2)
+
+	class Meta:
+		ordering=['Codigo','Fecha']
+		verbose_name_plural='Recibos'
+
+	def __str__(self):
+		return '%s - %s - %s' % (self.Codigo,self.Fecha,self.suscripcion.Suscriptor)
+
+
+
+
+
+
+
+
+
+
+
+

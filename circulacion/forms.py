@@ -25,4 +25,23 @@ class clientesForm(forms.ModelForm):
             'FechaNacimiento': forms.DateInput(attrs={'class': 'datepicker','type':'date','dateformat':'yy-mm-dd'})
     }
     
+class suscripcionForm(forms.ModelForm):
+    class Meta:
+        model = suscripcion
+        fields='__all__'
+        widgets={
+        'Inicio': forms.DateInput(attrs={'class': 'datepicker','type':'date'}),
+        'Fin': forms.DateInput(attrs={'class': 'datepicker','type':'date'})
+        }
+
+class cierreForm(forms.ModelForm):
+    class Meta:
+        model = cierre
+        fields='__all__'
+        widgets={
+        'FechaPago': forms.DateInput(attrs={'class': 'datepicker','type':'date'}),
+        'Inicio': forms.DateInput(attrs={'class': 'datepicker','type':'date'}),
+        'Fin': forms.DateInput(attrs={'class': 'datepicker','type':'date'})
+
+        }
     
