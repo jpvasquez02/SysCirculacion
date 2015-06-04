@@ -17,7 +17,9 @@
     <link href='/static/css/jquery.iphone.toggle.css' rel='stylesheet'>
     <link href='/static/css/uploadify.css' rel='stylesheet'>
     <link href='/static/css/animate.min.css' rel='stylesheet'>
+    <link rel="shortcut icon" href="/static/img/dtiempo.ico">
     <script src="/static/bower_components/jquery/jquery.min.js"></script>
+
 <body>
 	<div class="navbar navbar-default" role="navigation">
 
@@ -74,9 +76,7 @@
                         </li>
                         <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Clientes</span></a>
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#">Agregar</a></li>
-                                <li><a href="#">Modificar</a></li>
-                                <li><a href="#">Cancelar</a></li>
+                                <li><a href="/clientes/">Agregar</a></li>
                             </ul>
                         </li>
                         <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Suscripciones </span></a>
@@ -86,6 +86,30 @@
                                 <li><a href="#">Cancelar</a></li>
                             </ul>
                         </li>
+                        <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Guia </span></a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="/guia/agregar">Agregar</a></li>
+                                <li><a href="/guia/modificar">Modificar</a></li>
+                            </ul>
+                         </li>       
+                        <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Planes</span></a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="/plan/">Agregar</a></li>
+                                <li><a href="/plan/modificar">Modificar</a></li>
+                            </ul>
+                        </li>
+                        <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Cierre Circulacion</span></a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="/cierre/">Detalle</a></li>
+                            </ul>
+                        </li>
+                        <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Tiraje</span></a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="/tiraje/agregar">Agregar</a></li>
+                                <li><a href="/tiraje/modificar">Modificar</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -95,15 +119,8 @@
         <div id="content" class="col-lg-10 col-sm-10">
             <!-- content starts -->
             <div>
-    <ul class="breadcrumb">
-        <li>
-            <a href="#">Home</a>
-        </li>
-        <li>
-            <a href="#">Dashboard</a>
-        </li>
-    </ul>
-</div>
+    
+            </div>
 <div class=" row">
     <div class="col-md-3 col-sm-3 col-xs-6">
         <a data-toggle="tooltip" title="6 new members." class="well top-block" href="#">
@@ -166,19 +183,29 @@
         </div>
     </div>
 
-	<table border="1">
+    <style type="text/css">
+        #modificar input{width: 85px}
+        #planes td {float: center; text-align: center}
+    </style>
+    
+    <h2>Modificar Planes</h2>
+	<table id="planes" border="1">
 		<tr>
 			<td>Codigo</td>
 			<td>Nombre</td>
-			<td>Accion</td>
+            <td>Precio</td>
+			<td>Modificar Datos</td>
 		</tr>
-		{% for it in q %}		
+		{% for it in qr %}		
 		<tr>
 			<td>{{it.CodigoPlan}}</td>
 			<td>{{it.Nombre}}</td>
-			<td><form action="/modificado/" method="post">
+            <td>{{it.Precio}}</td>
+			<td><form id ="modificar" action="/plan/modificar" method="post">
 				{% csrf_token %}
-				<input type="text" id="nombre" name="nombre">
+				<input type="text" placeholder="Codigo" id="codigo" name="codigo">
+                <input type="text" placeholder="Nombre" id="nombre" name="nombre">
+                <input type="number" placeholder="Precio" step="0.01" id="precio" name="precio">
 				<input type="hidden" value="{{ it.pk }}" name="id">
 				<input type="submit" value="Modificar"/>
 
@@ -189,7 +216,7 @@
 </table>
 
 
-<footer class="row">
+<footer class="row" style="text-align: center">
         <h3>
             <span> <p>Todos los derechos Reservados 2015 </p></span>
         </h3>

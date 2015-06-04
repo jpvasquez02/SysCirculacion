@@ -16,6 +16,6 @@ urlpatterns = patterns('',
     url(r'^plan/$', 'circulacion.views.set_planes', name='set_planes'),
     url(r'^control/$', 'circulacion.views.set_control', name='set_control'),
     url(r'^asesor/$', 'circulacion.views.set_asesores', name='set_asesores'),
-    #url(r'^modificado/$', 'circulacion.views.upt_planes', name='modificado'),
+    url(r'^plan/modificar$', 'circulacion.views.upt_plan', name='plan_modificar'),
     url(r'^admin/', include(admin.site.urls)),
 )

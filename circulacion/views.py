@@ -191,7 +191,7 @@ def upd_guia(request):
 	s=suscripcion.objects.all()
 	template='guia.html'
 	if request.method=='POST':
-		guia=guia.objects.filter(pk=request.POST.get("id","")).update(Ruta=request.POST.get("Ruta",""))
+		g=guia.objects.filter(pk=request.POST.get("id","")).update(Ruta=request.POST.get("Ruta",""))
 
 	return render(request,template,locals(),context_instance=RequestContext(request))
 
@@ -211,6 +211,18 @@ def set_tiraje(request):
 		form=tirajeForm()
 
 	return render (request, 'tiraje_agregar.html', {'form':form})
+
+@login_required
+def upt_plan(request):
+	qr=planes.objects.all()
+	template='plan_mod.html'
+	if request.method=='POST':
+		p=planes.objects.filter(pk=request.POST.get("id","")).update(CodigoPlan=request.POST.get("codigo",""))
+		p2=planes.objects.filter(pk=request.POST.get("id","")).update(Nombre=request.POST.get("nombre",""))
+		p3=planes.objects.filter(pk=request.POST.get("id","")).update(Precio=request.POST.get("precio",""))
+
+	return render(request, template,locals(),context_instance=RequestContext(request))
+
 
 
 
