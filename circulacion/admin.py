@@ -36,6 +36,9 @@ class SuscripcionesAdmin(admin.ModelAdmin):
 class EmpleadosAdmin(admin.ModelAdmin):
 	pass
 
+class TirajeAdmin(admin.ModelAdmin):
+	ordering=['Ruta']
+
 admin.site.register(asesores,AsesoresAdmin)
 admin.site.register(departamentos,DeptoAdmin)
 admin.site.register(empleados,EmpleadosAdmin)
@@ -47,3 +50,4 @@ admin.site.register(repartidores,RepartidoresAdmin)
 admin.site.register(rutas,RutasAdmin)
 admin.site.register(suscripcion)
 admin.site.register(supervisores,SupervisoresAdmin)
+admin.site.register(tiraje,TirajeAdmin)

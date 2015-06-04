@@ -44,4 +44,19 @@ class cierreForm(forms.ModelForm):
         'Fin': forms.DateInput(attrs={'class': 'datepicker','type':'date'})
 
         }
+
+class guiaForm(forms.ModelForm):
+    class Meta:
+        model = guia
+        fields='__all__'
+        widgets={
+        'Fecha': forms.DateInput(attrs={'class': 'datepicker','type':'date'})
+        }
+
+class tirajeForm(forms.ModelForm):
+    class Meta:
+        model = tiraje
+        fields='__all__'
+    
+    
     

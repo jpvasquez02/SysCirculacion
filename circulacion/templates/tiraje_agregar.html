@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Guia</title>
+	<title>Tiraje de Producción</title>
 	<link href="/static/css/bootstrap-cerulean.min.css" rel="stylesheet">
     <link href="/static/css/charisma-app.css" rel="stylesheet">
     <link href='/static/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
@@ -19,29 +19,11 @@
     <link href='/static/css/uploadify.css' rel='stylesheet'>
     <link href='/static/css/animate.min.css' rel='stylesheet'>
     <script src="/static/bower_components/jquery/jquery.min.js"></script>
-    <link rel="shortcut icon" href="/static/img/dtiempo.ico">
+     <link rel="shortcut icon" href="/static/img/dtiempo.ico">
     <script src="/static/js/bootstrap-datepicker.js"></script>
     <script scr="/static/js/jquery-ui.js"></script>
     <script scr="/static/js/modernizr.js"></script>
     <script src="/static/bower_components/jquery/jquery.min.js"></script>
-
-<script>
-    (function() {
-
-    if (!Modernizr.inputtypes.date) {
-
-        $(document).ready(function () {
-                
-                $('#datepicker').datepicker({
-                    format: "dd/mm/yyyy"
-                });  
-            
-            });
-
-    }
-});
-</script>
-
 
 </head>
 <body>
@@ -210,41 +192,21 @@
             </div>
         </div>
     </div>
-	<label>Fecha</label>
 
-	<table border=1>
-		<tr>
-			<td>Numero</td>
-			<td>Nombre</td>
-			<td>Destino</td>
-			<td>Envios</td>
-			<td>Cortesias</td>
-			<td>Suscripciones</td>
-			<td>Total</td>
-			<td>Accion</td>
-		</tr>
-		<tr>
-		{% for suscripciones in s %}
-		
-			<td>1</td>
-			<td>{{suscripciones.Suscriptor}}</td>
-			<td>{{suscripciones.Ruta}}</td>
-			<td>3</td>
-			<td>2</td>
-			<td>4</td>
-			<td> {{3|add:2|add:4}} </td>
-			<td>{% csrf_token %}
-				<input type="text" id="nombre" name="nombre">
-				<input type="hidden" value="{{ suscripciones.pk }}" name="id">
-				<input type="submit" value="modificar">
-			</form>
-		</tr>
-		
-		{% endfor %}
-	</table>
+    <style type="text/css">
+        #tiraje p label {width: 25%}
+    </style>
+	
+	<h2>Tiraje Producción</h2>
+    <form id="tiraje" style="border: 1px solid; padding: 1em; width: 50%;" action="/tiraje/agregar" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Agregar" />
+        <input type="reset" value="Cancelar"/>
+    </form>
 
 
-    <footer class="row" style="text-align: center">
+	<footer class="row" style="text-align: center">
         <h3>
             <span> <p>Todos los derechos Reservados 2015 </p></span>
         </h3>
@@ -266,6 +228,7 @@
 	<script src="/static/js/jquery.uploadify-3.1.min.js"></script>
 	<script src="/static/js/jquery.history.js"></script>
 	<script src="/static/js/charisma.js"></script>
+	
 	
 </body>
 </html>

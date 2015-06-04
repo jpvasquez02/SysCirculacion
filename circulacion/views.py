@@ -30,6 +30,8 @@ def set_planes(request):
 
 			plan.save()
 
+			return HttpResponseRedirect('/plan/')
+
 	else:
 		form = planesForm()
 
@@ -46,6 +48,8 @@ def set_asesores(request):
 			asesor.NombreAsesor=request.POST.get("NombreAsesor","")
 
 			asesor.save()
+
+			return HttpResponseRedirect('/asesor/')
 
 	else:
 		form= asesoresForm()
@@ -66,6 +70,8 @@ def set_control(request):
 			crt.Comentarios=request.POST.get("Comentarios","")
 
 			crt.save()
+
+			return HttpResponseRedirect('/control/')
 
 	else:
 		form= controlForm()
@@ -151,7 +157,7 @@ def set_cierre(request):
 	c=suscripcion.objects.all()
 	template='cierre.html'
 	if request.method=='POST':
-		s=suscripcion.objects.filter(Codigo=request.POST.get("Codigo","")).update(Suscriptor=request.POST.get("Suscriptor"))
+		s=suscripcion.objects.filter(Codigo=request.POST.get("Codigo","")).update(Suscriptor=request.POST.get("Suscriptor",""))
 
 	return render(request,template,locals(),context_instance=RequestContext(request))
 
@@ -160,7 +166,55 @@ def upt_tiraje(request):
 	t=tiraje.objects.all()
 	template='tiraje.html'
 	if request.method=='POST':
-		tr=tiraje.objects.filter(pk=request.POST.get("id","")).update(Lunes=request.POST.get("",""))
+		tr=tiraje.objects.filter(pk=request.POST.get("id","")).update(Lunes=request.POST.get("Lunes",""))
+
+	return render(request,template,locals(),context_instance=RequestContext(request))
+
+@login_required
+def set_guia(request):
+	if request.method=='POST':
+		form=guiaForm(request.POST)
+
+		if form.is_valid():
+
+			form.save()
+
+			return HttpResponseRedirect('/guia/agregar')
+
+	else:
+		form=guiaForm()
+
+	return render (request, 'addguia.html', {'form':form})
+
+@login_required
+def upd_guia(request):
+	s=suscripcion.objects.all()
+	template='guia.html'
+	if request.method=='POST':
+		guia=guia.objects.filter(pk=request.POST.get("id","")).update(Ruta=request.POST.get("Ruta",""))
+
+	return render(request,template,locals(),context_instance=RequestContext(request))
+
+@login_required
+def set_tiraje(request):
+	if request.method=='POST':
+		form=tirajeForm(request.POST)
+
+
+		if form.is_valid():
+
+			form.save()
+
+			return HttpResponseRedirect('/tiraje/agregar')
+
+	else:
+		form=tirajeForm()
+
+	return render (request, 'tiraje_agregar.html', {'form':form})
+
+
+
+
 
 
 

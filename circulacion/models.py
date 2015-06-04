@@ -183,7 +183,7 @@ class tiraje(models.Model):
 
 	class Meta:
 		ordering=['Ruta']
-		verbose_name_plural='Plural'
+		verbose_name_plural='Tiraje'
 
 	def __str__(self):
 		return self.Ruta.NombreRuta
@@ -203,7 +203,6 @@ class cierre(models.Model):
 	Fin=models.DateField()
 
 	class Meta:
-		
 		verbose_name_plural='Cierre Circulación'
 
 	def __str__(self):
@@ -224,6 +223,25 @@ class recibo(models.Model):
 
 	def __str__(self):
 		return '%s - %s - %s' % (self.Codigo,self.Fecha,self.suscripcion.Suscriptor)
+
+class guia(models.Model):
+	Fecha=models.DateField()
+	Dia=models.CharField(max_length=10,choices=[('L','Lunes'),('M','Martes'),('K','Miercoles'),('J','Jueves'),('V','Viernes'),('S','Sabado'),('D','Domingo')])
+	Ruta=models.ForeignKey(rutas)
+	Supervisor=models.ForeignKey(supervisores,blank=True,null=True)
+	Cliente=models.ForeignKey(suscripcion)
+	Destino=models.CharField(max_length=140,blank=True,null=True)
+	Envios=models.IntegerField(max_length=5,blank=True,null=True)
+	Cortesias=models.IntegerField(max_length=5,blank=True,null=True)
+	Suscripciones=models.IntegerField(max_length=5,blank=True,null=True)
+
+	class Meta:
+		ordering=['Ruta']
+		verbose_name_plural='Guía de Producción'
+
+	def __str__(self):
+		return '%s - %s - %s' % (self.Fecha,self.Ruta.NombreRuta,self.suscripcion.Suscriptor)
+
 
 
 

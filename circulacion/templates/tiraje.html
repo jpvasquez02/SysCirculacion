@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} Circulacion - Planes {% endblock %}</title>
+    <title>{% block title %} Circulacion - Tiraje {% endblock %}</title>
     <link href="/static/css/bootstrap-cerulean.min.css" rel="stylesheet">
     <link href="/static/css/charisma-app.css" rel="stylesheet">
     <link href='/static/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
@@ -79,8 +79,6 @@
                         <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Clientes</span></a>
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="/clientes/">Agregar</a></li>
-                                <li><a href="#">Modificar</a></li>
-                                <li><a href="#">Cancelar</a></li>
                             </ul>
                         </li>
                         <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Suscripciones </span></a>
@@ -102,6 +100,17 @@
                                 <li><a href="/modificado/">Modificar</a></li>
                             </ul>
                         </li>
+                        <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Cierre Circulacion</span></a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="/cierre/">Detalle</a></li>
+                            </ul>
+                        </li>
+                        <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Tiraje</span></a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="/tiraje/modificar">Modificar</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -181,9 +190,48 @@
             </div>
         </div>
     </div>
+</div>
+
+    <style> 
+        #Tiraje {padding: 1em;}
+    </style>
+
+    <h2>Tiraje de Producción</h2>
     
     <table border="1">
-        
+        <tr>
+            <td>Ruta</td>
+            <td>Lunes</td>
+            <td>Martes</td>
+            <td>Miercoles</td>
+            <td>Jueves</td>
+            <td>Viernes</td>
+            <td>Sabado</td>
+            <td>Domingo</td>
+            <td>Accion</td>
+        </tr>
+        {% for qr in t %}
+        <tr>
+            <td>{{t.Ruta}}</td>
+            <td>{{t.Lunes}}</td>
+            <td>{{t.Martes}}</td>
+            <td>{{t.Miercoles}}</td>
+            <td>{{t.Jueves}}</td>
+            <td>{{t.Viernes}}</td>
+            <td>{{t.Sabado}}</td>
+            <td>{{t.Domingo}}</td>
+            <td><form action="/tiraje/modificar/" method="post">
+                {% csrf_token %}
+                <input type="text" id="dia" name="dia">
+                <input type="hidden" value="{{ qr.pk }}" name="id">
+                <input type="submit" value="Modificar"/>
+
+
+            </form>
+            </td>
+        </tr>
+        {% endfor %}
+
     </table>
     
     <footer class="row" style="text-align: center">
