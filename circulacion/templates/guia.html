@@ -24,6 +24,7 @@
     <script scr="/static/js/jquery-ui.js"></script>
     <script scr="/static/js/modernizr.js"></script>
     <script src="/static/bower_components/jquery/jquery.min.js"></script>
+    <script src="/static/js/jQuery.print.js"></script>
 
 <script>
     (function() {
@@ -41,6 +42,30 @@
     }
 });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $(".print_div").find('button').on('click', function() {
+ 
+            var dv_id = $(this).parents(".print_div").attr('id');
+ 
+            //Print ele4 with custom options
+            $('#' + dv_id).print({
+                //Use Global styles
+                globalStyles: false,
+                //Add link with attrbute media=print
+                mediaPrint: false,
+                //Custom stylesheet
+                stylesheet: "http://fonts.googleapis.com/css?family=Inconsolata",
+                //Print in a hidden iframe
+                iframe: true,
+                //Don't print this
+                noPrintSelector: ".avoid-this"
+            });
+        });
+    });
+</script>
+
 
 
 </head>
@@ -98,7 +123,7 @@
                         <li class="nav-header">MENU</li>
                         <li><a href="#"><i class="glyphicon glyphicon-home"></i><span> Inicio</span></a>
                         </li>
-                        <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Clientes </span></a>
+                        <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Clientes</span></a>
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="/clientes/">Agregar</a></li>
                             </ul>
@@ -119,7 +144,7 @@
                         <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Planes</span></a>
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="/plan/">Agregar</a></li>
-                                <li><a href="#">Modificar</a></li>
+                                <li><a href="/plan/modificar">Modificar</a></li>
                             </ul>
                         </li>
                         <li><a><i class="glyphicon glyphicon-eye-open"></i><span> Cierre Circulacion</span></a>
@@ -211,8 +236,24 @@
         </div>
     </div>
 	<label>Fecha</label>
+    <input id="fecha_actual" type="date" >
+    <label>Dia</label>
+    <select id='dia' name="diasemana">
+        <option value select="select">--------</option>
+        <option value="Lunes">Lunes</option>
+        <option value="Martes">Martes</option>
+        <option value="Miercoles">Miercoles</option>
+        <option value="Jueves">Jueves</option>
+        <option value="Viernes">Viernes</option>
+        <option value="Sabado">Sabado</option>
+        <option value="Domingo">Domingo</option>
+    </select>
+    <input id="buscar" type="submit">
 
-	<table border=1>
+    <input id="print" name="print" value="Imprimir" type="button" onClick="javascript:printPage()">
+
+
+	<table border=1 style="padding: 1em; margin-top: 1em;">
 		<tr>
 			<td>Numero</td>
 			<td>Nombre</td>
@@ -221,7 +262,7 @@
 			<td>Cortesias</td>
 			<td>Suscripciones</td>
 			<td>Total</td>
-			<td>Accion</td>
+			<td>Modificar</td>
 		</tr>
 		<tr>
 		{% for suscripciones in s %}
@@ -234,7 +275,7 @@
 			<td>4</td>
 			<td> {{3|add:2|add:4}} </td>
 			<td>{% csrf_token %}
-				<input type="text" id="nombre" name="nombre">
+				<input type="text" id="envios" name="envio" placeholder="Envios">
 				<input type="hidden" value="{{ suscripciones.pk }}" name="id">
 				<input type="submit" value="modificar">
 			</form>

@@ -46,7 +46,7 @@ class asesores(models.Model):
 
 class repartidores(models.Model):
 	NombreRepartidor=models.CharField(max_length=140)
-	Telefono=models.CharField(max_length=10)
+	Telefono=models.CharField(max_length=10,blank=True,null=True)
 
 	class Meta:
 		ordering=['NombreRepartidor']
@@ -94,17 +94,6 @@ class control(models.Model):
 
 	def __str__(self):
 		return '%s - %s' % (self.Fecha,self.Motivo)
-
-class repartidores(models.Model):
-	NombreRepartidor=models.CharField(max_length=140)
-	Telefono=models.CharField(max_length=15,blank=True,null=True)
-
-	class Meta:
-		ordering=['NombreRepartidor']
-		verbose_name_plural='Repartidores'
-
-	def __str__(self):
-		return self.NombreRepartidor
 
 
 class clientes(models.Model):
