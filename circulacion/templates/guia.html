@@ -253,7 +253,11 @@
     <input id="print" name="print" value="Imprimir" type="button" onClick="javascript:printPage()">
 
 
-	<table border=1 style="padding: 1em; margin-top: 1em;">
+    <style>
+        #ruta1 input { width: 80px;}
+    </style>
+
+	<table id="ruta1" border=1 style="padding: 1em; margin-top: 1em;">
 		<tr>
 			<td>Numero</td>
 			<td>Nombre</td>
@@ -270,14 +274,16 @@
 			<td>1</td>
 			<td>{{suscripciones.Suscriptor}}</td>
 			<td>{{suscripciones.Ruta}}</td>
-			<td>3</td>
-			<td>2</td>
-			<td>4</td>
+			<td>{{suscripciones.envio}}</td>
+			<td>{{suscripciones.cortesia}}</td>
+			<td>{{suscripciones.suscripcion}}</td>
 			<td> {{3|add:2|add:4}} </td>
 			<td>{% csrf_token %}
 				<input type="text" id="envios" name="envio" placeholder="Envios">
+                <input type="text" id="cortesias" name="cortesias" placeholder="cortesias">
+                <input type="text" id="suscripciones" name="suscripciones" placeholder="suscripciones">
 				<input type="hidden" value="{{ suscripciones.pk }}" name="id">
-				<input type="submit" value="modificar">
+				<input type="submit" value="Modificar">
 			</form>
 		</tr>
 		
