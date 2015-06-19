@@ -271,13 +271,13 @@
 		<tr>
 		{% for suscripciones in s %}
 		
-			<td>1</td>
+			<td></td>
 			<td>{{suscripciones.Suscriptor}}</td>
 			<td>{{suscripciones.Ruta}}</td>
-			<td>{{suscripciones.envio}}</td>
-			<td>{{suscripciones.cortesia}}</td>
-			<td>{{suscripciones.suscripcion}}</td>
-			<td> {{3|add:2|add:4}} </td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 			<td>{% csrf_token %}
 				<input type="text" id="envios" name="envio" placeholder="Envios">
                 <input type="text" id="cortesias" name="cortesias" placeholder="cortesias">

@@ -3,6 +3,7 @@ from django.template.context import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import condition
 import json
 from circulacion.models import *
 from circulacion.forms import *
