@@ -75,6 +75,18 @@ class ciudades(models.Model):
 	def __str__(self):
 		return self.Municipio
 
+class colonias(models.Model):
+	Nombre=models.CharField(max_length=30)
+	Nse=models.CharField(max_length=5,blank=True,null=True)
+
+	class Meta:
+		ordering=['Nombre']
+
+	def __str__(self):
+		return self.Nombre
+
+
+
 class control(models.Model):
 	Opciones= (
 		(1,'Faltaron X Vendedores'),

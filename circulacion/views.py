@@ -224,14 +224,3 @@ def upt_plan(request):
 
 	return render(request, template,locals(),context_instance=RequestContext(request))
 
-
-
-
-
-
-
-
-
-
-
-
