@@ -224,3 +224,18 @@ def upt_plan(request):
 
 	return render(request, template,locals(),context_instance=RequestContext(request))
 
+def set_punto(request):
+	if request.method=='POST':
+		form=puntoForm(request.POST)
+
+		if form.is_valid():
+
+			form.save()
+
+			return HttpResponseRedirect('/ventas/punto')
+
+	else:
+		form=puntoForm()
+
+	return render (request, 'punto_vta.html', {'form':form})
+

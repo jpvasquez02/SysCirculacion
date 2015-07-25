@@ -189,6 +189,27 @@ class tiraje(models.Model):
 	def __str__(self):
 		return self.Ruta.NombreRuta
 
+class punto(models.Model):
+	Ruta=models.ForeignKey(rutas)
+	Supervisor=models.ForeignKey(supervisores,blank=True,null=True)
+	Codigo=models.IntegerField(max_length=10)
+	Nombre=models.CharField(max_length=140)
+	Lunes=models.IntegerField(max_length=5)
+	Martes=models.IntegerField(max_length=5)
+	Miercoles=models.IntegerField(max_length=5)
+	Jueves=models.IntegerField(max_length=5)
+	Viernes=models.IntegerField(max_length=5)
+	Sabado=models.IntegerField(max_length=5)
+	Domingo=models.IntegerField(max_length=5)
+
+	class Meta:
+		ordering=['Ruta','Supervisor']
+		verbose_name_plural='Punto de Venta'
+
+	def __str__(self):
+		return '%s - %s - %s' % (self.Codigo,self.Nombre,self.Ruta)
+
+
 class cierre(models.Model):
 	Vendedor=models.ForeignKey(empleados)
 	Nombre=models.ForeignKey(suscripcion)

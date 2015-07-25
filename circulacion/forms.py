@@ -57,6 +57,11 @@ class tirajeForm(forms.ModelForm):
     class Meta:
         model = tiraje
         fields='__all__'
+
+class puntoForm(forms.ModelForm):
+    class Meta:
+        model = punto
+        fields='__all__'
     
     
     
